@@ -1,0 +1,18 @@
+<configs>
+    <config name="205-rdp" protocol="rdp">
+        <param name="hostname" value="192.168.20.205" />
+        <param name="port" value="3389" />
+    </config>
+
+    <config name="25-ssh" protocol="ssh">
+        <param name="hostname" value="192.168.20.25" />
+        <param name="port" value="22" />
+    </config>
+
+    <config name="206-vnc-linux" protocol="vnc">
+        <param name="hostname" value="192.168.20.206" />
+        <param name="port" value="5901" />
+    </config>
+
+<config name="192.168.20.15" protocol="ssh">
+<param name="hostname" value="192.168.20.15" /><param name="port" value="22" /></config></configs>
