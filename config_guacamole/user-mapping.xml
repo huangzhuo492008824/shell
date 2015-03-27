@@ -1,7 +1,0 @@
-<configs>
-    <config name="rdp-205" protocol="rdp">
-        <param name="hostname" value="192.168.20.205" />
-        <param name="port" value="3389" />
-    </config>
-</configs>
-
