@@ -1,6 +1,19 @@
 # -*- coding=utf-8 -*-
 import xml.etree.ElementTree as ET
 
+
+def find_ip(ip, nodes_config_list):
+    for child in nodes_config_list:
+        if ip == child.attrib.get("name"):
+            return True
+    return False
+
+def del_ip(ip, nodes_config_list):
+    for child in nodes_config_list:
+        if ip == child.attrib.get("name"):
+            root.remove(child)
+            return True
+
 if __name__ == "__main__":
 
     tree = ET.parse('./noauth-config.xml')
@@ -14,12 +27,7 @@ if __name__ == "__main__":
 
     nodes_config = tree.getroot().findall("config")
 
-    for child in nodes_config:
-        print child.tag,child.attrib
-        if ip == child.attrib.get("name"):
-            print "ip is in use!"
-            ip_in_use=True
-            break
+    ip_in_use = find_ip(ip,nodes_config)
 
 #开始增加元素config：
     if ip_in_use == False:
@@ -30,4 +38,6 @@ if __name__ == "__main__":
         tmp2 = ET.SubElement(tmp,"param", {"name":"port", "value":port})
 
         nodes_config.append(tmp)
+    del_ip("25-ssh", nodes_config)
     tree.write("xml_out002.xml")
+
