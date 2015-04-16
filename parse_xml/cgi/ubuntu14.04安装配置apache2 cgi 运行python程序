@@ -1,0 +1,21 @@
+ubuntu14.04安装配置apache2 cgi 运行python程序
+
+1.ubuntu安装apache2:
+sudo apt-get install apache2
+2.首先在根目录下建一个cgi-bin的目录，即/var/www/cgi-bin/。cgi程序都放在这个cgi-bin的目录中，不能放在其他的目录中。
+打开apache2配置文件：vim /etc/apache2/apache2.conf,在<Directory /var/www/>段后边添加：
+ScriptAlias /cgi-bin/ /var/www/cgi-bin/
+<Directory "/var/www/cgi-bin/">
+    AllowOverride None
+    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+    Order allow,deny
+    Allow from all
+    AddHandler cgi-script py
+</Directory>
+
+3.把cgi的模块链接到可用模块（）：
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/cgid.conf cgid.conf
+sudo ln -s ../mods-available/cgid.load cgid.load
+
+4.重启apache2即可执行cgi-bin目录下的py文件（权限改为755，py操作文件貌似只能在cgi-bin/目录下）
